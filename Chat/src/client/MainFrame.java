@@ -135,7 +135,7 @@ public class MainFrame extends JFrame implements Protocol {
 		Windows l = new Windows();
 		addWindowListener(l);
 		setResizable(false);
-		// 오프라인 목록 등록
+
 		for (int i = 0; i < user.length; i++) {
 			model_off.addElement(user[i]);
 		}
