@@ -17,7 +17,7 @@ import util.Protocol;
 public class ServerMain implements Protocol {
 	private static ServerSocket server = null;
 	private static ConcurrentHashMap<Long, SYThread> thread_hm = null;
-	private static final String user[] = { "Jin", "Kim", "Choi" };
+	private static final String user[] = { "Jin", "Kim", "Choi", "Arai"};
 
 	static class SYThread extends Thread {
 		DataOutputStream dos = null;
@@ -49,6 +49,9 @@ public class ServerMain implements Protocol {
 				dis = new DataInputStream(client.getInputStream());
 				while (!Thread.currentThread().isInterrupted()) {
 					int protocol = dis.readInt();
+					
+					System.out.println("run : " + protocol);
+					
 					if (protocol != -1) {
 						sendProtocol(protocol);
 					}
@@ -79,16 +82,26 @@ public class ServerMain implements Protocol {
 			switch (protocol) {
 			case USER_UPDATE:
 				sendMsg(USER_UPDATE, name);
+				
+				System.out.println("USER_UPDATEname : " + name);
+				System.out.println("USER_UPDATEprotocol : " + protocol);
+				
 				break;
 
 			case USER_LIST:
 				dos = new DataOutputStream(client.getOutputStream());
 				dos.writeInt(USER_LIST);
 				dos.writeInt(hm_th.size());
+				
+				System.out.println(hm_th.size());
 
 				while (it1.hasNext()) {
 					String name = it1.next();
 					dos.writeUTF(name);
+					
+					System.out.println("USER_LISTname : " + name);
+					System.out.println("USER_LISTprotocol : " + protocol);
+					
 				}
 				dos.flush();
 				break;
@@ -96,16 +109,27 @@ public class ServerMain implements Protocol {
 			case CHAT:
 				String msg = dis.readUTF();
 				sendMsg(CHAT, msg);
+				
+				System.out.println("Chatmsg : " + msg);
+				
 				break;
 
 			case USER_UPDATE_EXIT:
 				exit();
+				
+				System.out.println("exit");
+				
 				break;
 
 			case MESSAGE:
 				String recv_name = dis.readUTF();
 				String recv_msg = dis.readUTF();
+				
 				sendMsg(MESSAGE, recv_msg, recv_name);
+				
+				System.out.println("recv_name : " + recv_name);
+				System.out.println("recv_msg : " + recv_msg);
+				
 				break;
 			default:
 				break;
@@ -121,6 +145,9 @@ public class ServerMain implements Protocol {
 					dos = new DataOutputStream(sock.getOutputStream());
 					dos.writeInt(protocol);
 					dos.writeUTF(msg);
+					
+					System.out.println("sendMsg : " + msg);
+					
 					dos.flush();
 				}
 			}
@@ -134,6 +161,9 @@ public class ServerMain implements Protocol {
 				dos = new DataOutputStream(sock.getOutputStream());
 				dos.writeInt(protocol);
 				dos.writeUTF(msg);
+				
+				System.out.println("boolean sendMsg : " + msg);
+				
 				dos.flush();
 			}
 		}

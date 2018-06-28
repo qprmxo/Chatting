@@ -1,12 +1,10 @@
 package client;
 
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.im.InputContext;
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -105,10 +103,7 @@ public class LoginFrame extends JFrame {
 				lbl_state.setText("Write name!");
 				return;
 			}
-			// socket = new Socket("127.0.0.1", 5555);
-			socket = new Socket("192.168.100.103", 5555);
-			// socket = new Socket("1.240.130.211", 5555);
-			// socket = new Socket("192.168.0.21", 5555);
+			socket = new Socket("192.168.17.221", 5555);
 			pw = new PrintWriter(socket.getOutputStream(), true);
 			dis = new DataInputStream(socket.getInputStream());
 		} catch (UnknownHostException e1) {

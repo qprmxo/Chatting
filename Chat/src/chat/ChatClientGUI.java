@@ -37,7 +37,7 @@ class ChatFrame extends JFrame{
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
 		try{
-			socket=new Socket("192.168.100.103", 3000);
+			socket=new Socket("192.168.17.221", 3000);
 			list.add("Server connection success.........");
 			new RecThread().start();
 			

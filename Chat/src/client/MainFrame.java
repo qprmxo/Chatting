@@ -47,7 +47,7 @@ public class MainFrame extends JFrame implements Protocol {
 	private WorkerThread thread;
 	private JScrollPane scrollPane_2;
 	private JLabel label;
-	private static final String user[] = { "Jin", "Kim", "Choi" };
+	private static final String user[] = { "Jin", "Kim", "Choi", "Arai"};
 	private JLabel lbl_user;
 	private int count = -1;
 
@@ -93,7 +93,7 @@ public class MainFrame extends JFrame implements Protocol {
 		});
 		scrollPane_1.setViewportView(list_user);
 
-		lbl_user = new JLabel("Now (" + count + "/16)");
+		lbl_user = new JLabel("Now (" + count + "/" + user.length + ")");
 
 		lbl_user.setBounds(460, 14, 105, 15);
 		getContentPane().add(lbl_user);
@@ -280,13 +280,13 @@ public class MainFrame extends JFrame implements Protocol {
 							}
 							count++;
 						}
-						lbl_user.setText("Now (" + (++count) + "/16)");
+						lbl_user.setText("Now (" + (++count) + "/" + user.length + ")");
 						break;
 
 					case USER_UPDATE:
 						String name = dis.readUTF();
 						model_user.addElement(name);
-						lbl_user.setText("Now (" + (++count) + "/16)");
+						lbl_user.setText("Now (" + (++count) + "/" + user.length + ")");
 
 						for (int i = 0; i < model_off.size(); i++) {
 							if (name.equals(model_off.get(i))) {
@@ -306,7 +306,7 @@ public class MainFrame extends JFrame implements Protocol {
 						String exit_name = dis.readUTF();
 						int list_length = model_user.size();
 
-						lbl_user.setText("Now (" + (--count) + "/16)");
+						lbl_user.setText("Now (" + (--count) + "/" + user.length + ")");
 						for (int i = 0; i < list_length; i++) {
 							if (exit_name.equals(model_user.get(i))) {
 								model_user.remove(i);

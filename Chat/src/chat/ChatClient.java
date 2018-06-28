@@ -62,7 +62,7 @@ public class ChatClient {
 	public static void main(String[] args) {
 		Socket socket=null;
 		try{
-			socket=new Socket("192.168.100.103",3000);
+			socket=new Socket("192.168.17.221",3000);
 			System.out.println("Server connection success!!..........");
 			new SendThread(socket).start();
 			new RecThread(socket).start();
